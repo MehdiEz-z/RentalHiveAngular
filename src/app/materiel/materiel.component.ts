@@ -13,7 +13,8 @@ export class Materiel {
     public transmission: string,
     public marque: string,
     public type: string,
-    public etat: string
+    public etat: string,
+    public disponibilite: string
   ) {}
 }
 
@@ -38,8 +39,8 @@ export class MaterielComponent implements OnInit {
   getMateriels() {
     this.httpClient.get<any>('http://localhost:8082/api/materiel/').subscribe(
       response => {
-        console.log(response);
-        this.materiels = response;
+        console.log(response.data);
+        this.materiels = response.data;
       }
     );
   }

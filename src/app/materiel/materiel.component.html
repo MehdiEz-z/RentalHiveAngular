@@ -1,1 +1,47 @@
-<p>materiel works!</p>
+<div class="container">
+  <!-- <div class="border">
+    <button class="btn btn-md btn-outline-primary">
+      <i class="fa fa-user"></i>New Friend</button>
+  </div> -->
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Matricule</th>
+      <th>Type</th>
+      <th>Marque</th>
+      <th>Prix de location</th>
+      <th>Etat du matériel</th>
+      <th>Disponibilité</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let materiel of materiels">
+      <td><span>{{materiel.matricul}}</span></td>
+      <td><span>{{materiel.type}}</span></td>
+      <td><span>{{materiel.marque}}</span></td>
+      <td><span>{{materiel.prix}} MAD</span></td>
+      <td>
+        <span
+          [class]="'badge rounded-pill ' + (materiel.etat === 'EN_SERVICE' ? 'text-bg-success' : materiel.etat === 'EN_MAINTENANCE' ? 'text-bg-warning text-white' : 'text-bg-danger')">
+          <i class="fa fa-{{ materiel.etat === 'EN_SERVICE' ? 'check' : materiel.etat === 'EN_MAINTENANCE' ? 'gear' : 'times' }}"></i>
+          {{materiel.etat === 'EN_SERVICE' ? 'En service' : materiel.etat === 'EN_MAINTENANCE' ? 'En maintenance' : 'Hors service'}}
+        </span>
+      </td>
+      <td>
+        <span
+          [class]="'badge rounded-pill ' + (materiel.disponibilite === 'DISPONIBLE' ? 'text-bg-success' : 'text-bg-danger')">
+          <i class="fa fa-{{ materiel.disponibilite === 'DISPONIBLE' ? 'check' : 'times' }}"></i>
+          {{ materiel.disponibilite === 'DISPONIBLE' ? 'Disponible' : 'Non Disponible' }}
+        </span>
+      </td>
+      <td>
+        <button class="btn btn-sm btn-primary">
+          <i class="fa fa-search pe-2"></i>Details</button>
+        <button class="btn btn-sm btn-secondary">
+          <i class="fa fa-check pe-2"></i>Demander</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

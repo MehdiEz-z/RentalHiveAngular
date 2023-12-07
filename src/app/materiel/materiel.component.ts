@@ -26,10 +26,9 @@ export class Materiel {
 export class MaterielComponent implements OnInit {
 
   materiels: Materiel[] = [];
-  private httpClient: HttpClient;
+  noDataMessage: string = '';
 
-  constructor(httpClient: HttpClient) {
-    this.httpClient = httpClient;
+  constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -39,8 +38,10 @@ export class MaterielComponent implements OnInit {
   getMateriels() {
     this.httpClient.get<any>('http://localhost:8082/api/materiel/').subscribe(
       response => {
-        console.log(response.data);
         this.materiels = response.data;
+      },
+      error => {
+        this.noDataMessage = error.error.message;
       }
     );
   }

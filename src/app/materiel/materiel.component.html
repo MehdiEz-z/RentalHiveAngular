@@ -3,6 +3,10 @@
     <button class="btn btn-md btn-outline-primary">
       <i class="fa fa-user"></i>New Friend</button>
   </div> -->
+  <h3 class="mb-4">
+    <i class="fa fa-truck pe-2"></i>
+    Liste des Materiels
+  </h3>
   <table class="table table-bordered table-striped">
     <thead>
     <tr>
@@ -16,30 +20,35 @@
     </tr>
     </thead>
     <tbody>
+    <tr *ngIf="!materiels || materiels.length === 0">
+      <td class="text-center text-secondary" colspan="7">{{ noDataMessage }}</td>
+    </tr>
     <tr *ngFor="let materiel of materiels">
-      <td><span>{{materiel.matricul}}</span></td>
-      <td><span>{{materiel.type}}</span></td>
-      <td><span>{{materiel.marque}}</span></td>
-      <td><span>{{materiel.prix}} MAD</span></td>
-      <td>
+      <td class="text-center"><span>{{materiel.matricul}}</span></td>
+      <td class="text-center"><span>{{materiel.type}}</span></td>
+      <td class="text-center"><span>{{materiel.marque}}</span></td>
+      <td class="text-center"><span>{{materiel.prix}} MAD</span></td>
+      <td class="text-center">
         <span
           [class]="'badge rounded-pill ' + (materiel.etat === 'EN_SERVICE' ? 'text-bg-success' : materiel.etat === 'EN_MAINTENANCE' ? 'text-bg-warning text-white' : 'text-bg-danger')">
-          <i class="fa fa-{{ materiel.etat === 'EN_SERVICE' ? 'check' : materiel.etat === 'EN_MAINTENANCE' ? 'gear' : 'times' }}"></i>
+          <i [class] ="'fa fa-' +( materiel.etat === 'EN_SERVICE' ? 'check-circle' : materiel.etat === 'EN_MAINTENANCE' ? 'gear' : 'times-circle')"></i>
           {{materiel.etat === 'EN_SERVICE' ? 'En service' : materiel.etat === 'EN_MAINTENANCE' ? 'En maintenance' : 'Hors service'}}
         </span>
       </td>
-      <td>
+      <td class="text-center">
         <span
-          [class]="'badge rounded-pill ' + (materiel.disponibilite === 'DISPONIBLE' ? 'text-bg-success' : 'text-bg-danger')">
-          <i class="fa fa-{{ materiel.disponibilite === 'DISPONIBLE' ? 'check' : 'times' }}"></i>
-          {{ materiel.disponibilite === 'DISPONIBLE' ? 'Disponible' : 'Non Disponible' }}
+          [class]="'badge rounded-pill ' + (materiel.disponibilite === 'DISPONIBLE' ? 'text-bg-success' : materiel.disponibilite === 'EN_COURS_DE_RESERVATION' ? 'text-bg-warning text-white' : 'text-bg-danger')">
+          <i [class]="'fa fa-' +( materiel.disponibilite === 'DISPONIBLE' ? 'check-circle' : materiel.disponibilite === 'EN_COURS_DE_RESERVATION' ? 'gear' : 'times-circle-' )"></i>
+          {{ materiel.disponibilite === 'DISPONIBLE' ? 'Disponible' : materiel.disponibilite === 'EN_COURS_DE_RESERVATION' ? 'En cours de réservation' : 'Non Disponible' }}
         </span>
       </td>
-      <td>
+      <td class="text-center">
         <button class="btn btn-sm btn-primary">
-          <i class="fa fa-search pe-2"></i>Details</button>
-        <button class="btn btn-sm btn-secondary">
-          <i class="fa fa-check pe-2"></i>Demander</button>
+          <i class="fa fa-info-circle pe-2"></i>Details
+        </button>
+        <!--<button class="btn btn-sm btn-secondary" [disabled]="materiel.etat !== 'EN_SERVICE'">
+          <i class="fa fa-check-circle pe-2"></i>Demander
+        </button>-->
       </td>
     </tr>
     </tbody>

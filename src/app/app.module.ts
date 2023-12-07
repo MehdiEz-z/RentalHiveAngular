@@ -7,12 +7,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RentalhiveComponent } from './rentalhive/rentalhive.component';
 import { MaterielComponent } from './materiel/materiel.component';
 import {HttpClientModule} from "@angular/common/http";
+import { DemandeComponent } from './demande/demande.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RentalhiveComponent,
-    MaterielComponent
+    MaterielComponent,
+    DemandeComponent
   ],
   imports: [
     BrowserModule,

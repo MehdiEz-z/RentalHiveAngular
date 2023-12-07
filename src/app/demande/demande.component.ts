@@ -59,7 +59,7 @@ export class DemandeComponent implements OnInit {
     this.listeDemandes.forEach((demande: Demande) => {
       demande.materielDemander.forEach((materielDemande: any) => {
         const event = {
-          title: `${materielDemande.materiel.matricul} - ${materielDemande.materiel.type} - ${materielDemande.materiel.marque}`,
+          title: `"${materielDemande.materiel.matricul}" - ${materielDemande.materiel.type} - ${materielDemande.materiel.marque}`,
           start: new Date(materielDemande.debut),
           end: new Date(materielDemande.fin),
           color: this.getColorByStatut(materielDemande.materiel.disponibilite)

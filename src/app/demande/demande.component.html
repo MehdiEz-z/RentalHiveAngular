@@ -3,43 +3,50 @@
     <i class="fa fa-truck pe-2"></i>
     Liste des Demandes
   </h3>
-  <div class="border">
+  <div class="border mb-4">
     <button class="btn btn-md btn-outline-primary">
       <i class="fa fa-user"></i>Crée une Demande</button>
   </div>
-  <table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-      <th>Réference</th>
-      <th>Statut</th>
-      <th>Date du demande</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngIf="!listeDemandes || listeDemandes.length === 0">
-      <td class="text-center text-secondary" colspan="7">{{ noDataMessage }}</td>
-    </tr>
-    <tr *ngFor="let demande of listeDemandes">
-      <td class="text-center"><span>D-0001-2023</span></td>
-      <td class="text-center">
+  <div class="row mb-5">
+      <div class="col-md-6">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>Réference</th>
+            <th>Statut</th>
+            <th>Date du demande</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngIf="!listeDemandes || listeDemandes.length === 0">
+            <td class="text-center text-secondary" colspan="7">{{ noDataMessage }}</td>
+          </tr>
+          <tr *ngFor="let demande of listeDemandes">
+            <td class="text-center"><span>{{demande.reference}}</span></td>
+            <td class="text-center">
         <span
           [class]="'badge rounded-pill ' + (demande.statut === 'CONFIRMEE' ? 'text-bg-success' : demande.statut === 'EN_ATTENTE' ? 'text-bg-warning text-white' : demande.statut === 'EN_NEGOCIATION' ? 'text-bg-info text-white' : 'text-bg-danger')">
           <i [class] ="'fa fa-' +( demande.statut === 'CONFIRMEE' ? 'check-circle' : demande.statut === 'EN_ATTENTE' ? 'gear' : demande.statut === 'EN_NEGOCIATION' ? 'clock' : 'times-circle')"></i>
           {{demande.statut === 'CONFIRMEE' ? 'Confirmée' : demande.statut === 'EN_ATTENTE' ? 'En attente' : demande.statut === 'EN_NEGOCIATION' ? 'En négociation' : 'Annulée'}}
         </span>
-      </td>
-      <td class="text-center"><span>{{demande.dateDemande | date: 'dd MMMM yyyy'}}</span></td>
-      <td class="text-center">
-        <button class="btn btn-sm btn-primary">
-          <i class="fa fa-info-circle pe-2"></i>Details
-        </button>
-        <!--<button class="btn btn-sm btn-secondary" [disabled]="materiel.etat !== 'EN_SERVICE'">
-          <i class="fa fa-check-circle pe-2"></i>Demander
-        </button>-->
-      </td>
-    </tr>
-    </tbody>
-  </table>
+            </td>
+            <td class="text-center"><span>{{demande.dateDemande | date: 'dd MMMM yyyy'}}</span></td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary">
+                <i class="fa fa-info-circle pe-2"></i>Details
+              </button>
+              <!--<button class="btn btn-sm btn-secondary" [disabled]="materiel.etat !== 'EN_SERVICE'">
+                <i class="fa fa-check-circle pe-2"></i>Demander
+              </button>-->
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
 </div>
 
